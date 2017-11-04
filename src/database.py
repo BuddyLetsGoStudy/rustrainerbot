@@ -27,7 +27,7 @@ class User(object):
         
         :param tg_id: telegram user id <int>
         :param state: initial state <States: state>
-        :param amount: initial amount of words <int>
+        :param amount: initial amount of the words <int>
         """
         self.id = tg_id
         self.state = state
@@ -35,8 +35,8 @@ class User(object):
         self.word = None
 
         if tg_id < self.MIN_TELEGRAM_ID:
-            raise BadTelegramId("id = %d is lower than the minimal allowed telegram id: %d" %
-                                (tg_id, self.MIN_TELEGRAM_ID))
+            raise BadTelegramIdError("id = %d is lower than the minimal allowed telegram id: %d" %
+                                     (tg_id, self.MIN_TELEGRAM_ID))
 
     def __repr__(self):
         return "User(tg_id={0}, state={1}, amount={2})".format(self.id, self.state, self.amount)
@@ -63,7 +63,7 @@ class Users(object):
         :return: result of the transaction <bool>
         """
 
-        # If user already exists abort transaction
+        # if user is already exists abort the transaction
         if tg_id in self.users:
             return False
 
@@ -82,11 +82,11 @@ class Users(object):
         :return: pointer to self
         """
 
-        # If users is unknown raise an exception
+        # if user is unknown raise an exception
         if tg_id not in self.users:
             raise UnknownUserException("User with id = %d does not exist." % tg_id)
 
-        # If bad column provided raise an exception
+        # if bad column is provided raise an exception
         if not hasattr(self.users[tg_id], column):
             raise UnknownColumnException("User object does not have a %s column" % column)
 
@@ -140,5 +140,5 @@ class UnknownColumnException(ValueError):
     pass
 
 
-class BadTelegramId(ValueError):
+class BadTelegramIdError(ValueError):
     pass

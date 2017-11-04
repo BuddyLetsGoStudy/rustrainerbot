@@ -94,7 +94,7 @@ if __name__ == "__main__":
     # set listener
     bot.set_update_listener(listener)
 
-    # endless loop over polling
+    # endless loop over the polling
     while True:
         try:
             bot.polling(none_stop=True)
