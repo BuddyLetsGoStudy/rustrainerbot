@@ -9,14 +9,14 @@ class States:
     WAIT = 1
 
     @staticmethod
-    def state(state):
+    def state(s):
         """
         A little helper for debugging
         
-        :param state: <int>
+        :param s: <int>
         :return: state label <str>
         """
-        return filter(lambda x: getattr(States, x) == state, vars(States)).__next__()
+        return filter(lambda x: getattr(States, x) == s, vars(States)).__next__()
 
 
 class User(object):
